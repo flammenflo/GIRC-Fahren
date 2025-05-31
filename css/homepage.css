@@ -1,0 +1,206 @@
+/* Reset und Grundstil */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('../img/backpack.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Navigation */
+header {
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus {
+  background-color: #00bfff;
+  color: #000;
+  outline: none;
+}
+
+/* Hauptinhalt */
+.content {
+  flex: 1;
+  max-width: 900px;
+  margin: 50px auto 80px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px 50px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  color: #222;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+/* Hauptüberschrift */
+.content h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #0078d7;
+  text-align: center;
+}
+
+/* Sektion Überschrift */
+.ride-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #004a99;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+/* Liste der Fahrten */
+.ride-list {
+  list-style: none;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.ride-entry {
+  background: #f0f8ff;
+  border: 1.5px solid #0078d7;
+  border-radius: 10px;
+  padding: 18px 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0, 120, 215, 0.15);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+}
+
+.ride-entry:hover,
+.ride-entry:focus {
+  box-shadow: 0 8px 25px rgba(0, 120, 215, 0.3);
+  border-color: #005ea2;
+  outline: none;
+}
+
+.ride-entry strong {
+  font-size: 18px;
+  color: #0078d7;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.ride-entry small {
+  font-size: 14px;
+  color: #555;
+}
+
+.ride-entry em {
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  width: fit-content;
+  user-select: none;
+}
+
+/* Status Farben */
+.gestartet {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+.in-kuerze {
+  background-color: #fff3cd;
+  color: #664d03;
+  border: 1px solid #ffecb5;
+}
+
+/* Keine Fahrten Nachricht */
+.ride-list li:last-child {
+  color: #a00;
+  font-weight: 700;
+  text-align: center;
+  font-size: 16px;
+  padding: 20px 10px;
+}
+
+/* Footer */
+footer {
+  background: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  padding: 15px 10px;
+  color: #ccc;
+  font-size: 14px;
+  user-select: none;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .content {
+    margin: 30px 20px 60px;
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+
+  nav ul {
+    gap: 16px;
+  }
+
+  nav a {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+
+  .ride-entry {
+    padding: 14px 18px;
+  }
+
+  .ride-entry strong {
+    font-size: 16px;
+  }
+
+  .ride-entry small,
+  .ride-entry em {
+    font-size: 13px;
+  }
+}
