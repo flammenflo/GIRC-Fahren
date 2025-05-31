@@ -1,0 +1,226 @@
+/* Grundlegendes Styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('../img/backpack.png') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
+}
+
+/* Navigation */
+header {
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: color 0.3s ease;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #00bfff;
+  outline: none;
+}
+
+/* Überschrift */
+h2 {
+  text-align: center;
+  margin-bottom: 36px;
+  color: white;
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 0.05em;
+}
+
+/* Container für Inhalt */
+.userlist {
+  background: rgba(255, 255, 255, 0.97);
+  padding: 48px 50px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  max-width: 75%;
+  box-sizing: border-box;
+
+  margin: 50px auto;
+  transition: box-shadow 0.3s ease;
+}
+
+.userlist:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Hintergrund-Overlay */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  z-index: -1;
+}
+
+/* Inhalt über Overlay */
+.content {
+
+  position: relative;
+  padding: 80px 50px;
+  z-index: 1;
+}
+/* Tabelle */
+table {
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 75%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1.5px solid #0078d7;
+  background-color: #f0f8ff; /* bleibt hellblau wie bisher */
+}
+
+/* Tabellenzellen */
+th, td {
+  padding: 16px 20px;
+  border-bottom: 1.5px solid #e0e7f1;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Tabellenüberschriften */
+th {
+  background-color: #0078d7;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  user-select: none;
+}
+
+/* Tabellenzeilen */
+tbody tr {
+  background-color: #f9fbff;
+  transition: background-color 0.25s ease;
+}
+
+tbody tr:hover {
+  background-color: #dbe9ff;
+}
+
+/* Formular innerhalb der Tabelle */
+form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+/* Dropdown-Menü */
+select[name="new_rank"] {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1.5px solid #0078d7;
+  font-size: 15px;
+  color: #222;
+  background-color: #f0f8ff;
+  cursor: pointer;
+  min-width: 130px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border-color 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+select[name="new_rank"]:focus {
+  border-color: #005ea2;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 120, 215, 0.5);
+}
+
+/* Button mit Disketten-Symbol */
+button[type="submit"] {
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+button[type="submit"]:hover {
+  background-color: #005ea2;
+  transform: scale(1.05);
+}
+
+button[type="submit"]:active {
+  transform: scale(0.95);
+}
+
+/* Aktion-Spalte zentrieren */
+td:last-child {
+  text-align: center;
+  width: 80px;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 800px) {
+  .userlist {
+    padding: 25px 30px;
+    max-width: 95%;
+  }
+  table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    border-radius: 8px;
+  }
+  select[name="new_rank"] {
+    min-width: 110px;
+    font-size: 14px;
+  }
+  button[type="submit"] {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
