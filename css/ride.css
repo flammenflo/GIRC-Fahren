@@ -1,0 +1,286 @@
+/* ===== Grundlegendes Reset ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  color: #222;
+  background: url('../img/backpack.png') no-repeat center center fixed;
+  background-size: cover;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Layout Grundstruktur ===== */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Header & Navigation ===== */
+header {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+  font-size: 1.6rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.2rem;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  background-color: #00bfff;
+  color: #000;
+}
+
+/* ===== Headings ===== */
+h1, h2, h3, h4 {
+  color: #0078d7;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* ===== Formulare ===== */
+form {
+  margin-top: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #005ea2;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1.5px solid #0078d7;
+  border-radius: 8px;
+  background-color: #f9fbff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #00bfff;
+  box-shadow: 0 0 0 4px rgba(0, 191, 255, 0.2);
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ===== Buttons ===== */
+button,
+input[type="submit"] {
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0.5rem 0;
+  transition: background 0.2s, transform 0.1s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #005ea2;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button[type="button"] {
+  background-color: #ccc;
+  color: #222;
+}
+
+button[type="button"]:hover {
+  background-color: #aaa;
+}
+
+/* ===== Stationen / Nutzer Eingabe Reihen ===== */
+.station-row,
+.user-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.station-row input,
+.user-row select {
+  flex: 1;
+}
+
+/* ===== Schedule Cards ===== */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.schedule-card {
+  background: #f0f8ff;
+  border: 1.5px solid #0078d7;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 16px rgba(0, 120, 215, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.schedule-card:hover {
+  border-color: #005ea2;
+  box-shadow: 0 8px 24px rgba(0, 120, 215, 0.2);
+}
+
+.schedule-card h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.schedule-card .meta,
+.schedule-card .desc {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.schedule-card ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.schedule-card details summary {
+  cursor: pointer;
+  color: #005ea2;
+  font-weight: 600;
+  margin-top: 0.8rem;
+}
+
+/* ===== Statusfarben (Optional) ===== */
+.status {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.status--gestartet {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.status--in-kuerze {
+  background: #fff3cd;
+  color: #664d03;
+}
+
+/* ===== Fehlermeldung ===== */
+.error-message {
+  background: #ffeaea;
+  color: #a00;
+  padding: 1rem;
+  border-left: 4px solid #ff4d4f;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+/* ===== Footer ===== */
+footer {
+  background: rgba(0, 0, 0, 0.7);
+  color: #ccc;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.95rem;
+}
+
+/* ===== Responsive Anpassungen ===== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .content {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 0;
+  }
+
+  .station-row,
+  .user-row {
+    flex-direction: column;
+  }
+}

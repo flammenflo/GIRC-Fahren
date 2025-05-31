@@ -1,17 +1,26 @@
-/* Grundlegendes Styling */
+/* ========== RESET ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========== GLOBAL ========== */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: url('../img/backpack.png') no-repeat center center fixed;
   background-size: cover;
-  margin: 0;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #333;
 }
 
-/* Navigation */
+/* ========== HEADER / NAVIGATION ========== */
 header {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,7 +28,7 @@ header {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .logo {
@@ -32,8 +41,6 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 24px;
-  margin: 0;
-  padding: 0;
 }
 
 nav a {
@@ -41,19 +48,21 @@ nav a {
   text-decoration: none;
   font-weight: 600;
   font-size: 16px;
-  transition: color 0.3s ease;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 nav a:hover,
 nav a:focus {
-  color: #00bfff;
+  background-color: #00bfff;
+  color: #000;
   outline: none;
 }
 
-/* Überschrift */
+/* ========== TITEL & ABSCHNITTE ========== */
 h2 {
+  margin: 80px;
   text-align: center;
   margin-bottom: 36px;
   color: white;
@@ -62,16 +71,16 @@ h2 {
   letter-spacing: 0.05em;
 }
 
-/* Container für Inhalt */
+/* ========== CONTAINER ========== */
 .userlist {
   background: rgba(255, 255, 255, 0.97);
   padding: 48px 50px;
   border-radius: 14px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  max-width: 75%;
-  box-sizing: border-box;
-
-  margin: 50px auto;
+  max-width: 900px;
+  margin: 50px auto 80px;
+  color: #222;
+  line-height: 1.5;
   transition: box-shadow 0.3s ease;
 }
 
@@ -79,48 +88,28 @@ h2 {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
-/* Hintergrund-Overlay */
-.background-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(6px);
-  z-index: -1;
-}
-
-/* Inhalt über Overlay */
-.content {
-
-  position: relative;
-  padding: 80px 50px;
-  z-index: 1;
-}
-/* Tabelle */
+/* ========== TABELLE ========== */
 table {
+  position: center;
   margin: 0 auto;
+  width: 75%;
   border-collapse: separate;
   border-spacing: 0;
-  width: 75%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
+  background-color: #f0f8ff;
+  border-radius: 10px;
   overflow: hidden;
   border: 1.5px solid #0078d7;
-  background-color: #f0f8ff; /* bleibt hellblau wie bisher */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-/* Tabellenzellen */
 th, td {
-  padding: 16px 20px;
-  border-bottom: 1.5px solid #e0e7f1;
+  padding: 18px 22px;
   text-align: left;
   font-size: 16px;
   color: #333;
+  border-bottom: 1.5px solid #e0e7f1;
 }
 
-/* Tabellenüberschriften */
 th {
   background-color: #0078d7;
   color: white;
@@ -129,7 +118,6 @@ th {
   user-select: none;
 }
 
-/* Tabellenzeilen */
 tbody tr {
   background-color: #f9fbff;
   transition: background-color 0.25s ease;
@@ -139,7 +127,12 @@ tbody tr:hover {
   background-color: #dbe9ff;
 }
 
-/* Formular innerhalb der Tabelle */
+td:last-child {
+  text-align: center;
+  width: 80px;
+}
+
+/* ========== FORMULAR / DROPDOWN / BUTTON ========== */
 form {
   display: flex;
   align-items: center;
@@ -147,10 +140,9 @@ form {
   margin: 0;
 }
 
-/* Dropdown-Menü */
 select[name="new_rank"] {
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 10px 16px;
+  border-radius: 8px;
   border: 1.5px solid #0078d7;
   font-size: 15px;
   color: #222;
@@ -158,34 +150,31 @@ select[name="new_rank"] {
   cursor: pointer;
   min-width: 130px;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   transition: border-color 0.3s ease;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 120, 215, 0.04);
 }
 
 select[name="new_rank"]:focus {
   border-color: #005ea2;
   outline: none;
-  box-shadow: 0 0 8px rgba(0, 120, 215, 0.5);
+  box-shadow: 0 0 8px rgba(0, 120, 215, 0.18);
 }
 
-/* Button mit Disketten-Symbol */
 button[type="submit"] {
   background-color: #0078d7;
   color: white;
   border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 10px 18px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 700;
   font-size: 16px;
-  line-height: 1;
-  transition: background-color 0.3s ease, transform 0.15s ease;
+  transition: background-color 0.3s, transform 0.15s;
   display: flex;
   align-items: center;
   justify-content: center;
   user-select: none;
+  box-shadow: 0 2px 8px rgba(0, 120, 215, 0.07);
 }
 
 button[type="submit"]:hover {
@@ -197,30 +186,33 @@ button[type="submit"]:active {
   transform: scale(0.95);
 }
 
-/* Aktion-Spalte zentrieren */
-td:last-child {
-  text-align: center;
-  width: 80px;
-}
 
-/* Responsive Anpassungen */
-@media (max-width: 800px) {
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 1000px) {
   .userlist {
-    padding: 25px 30px;
-    max-width: 95%;
+    padding: 25px 10px;
+    max-width: 98vw;
   }
+
   table {
     width: 100%;
     display: block;
     overflow-x: auto;
     border-radius: 8px;
   }
+
   select[name="new_rank"] {
     min-width: 110px;
     font-size: 14px;
   }
+
   button[type="submit"] {
     font-size: 14px;
-    padding: 6px 10px;
+    padding: 8px 10px;
+  }
+
+  th, td {
+    padding: 12px 10px;
+    font-size: 15px;
   }
 }

@@ -25,6 +25,17 @@ if (isset($_POST['change_rank'])) {
 
     $allowedRanks = ['admin', 'Benutzer'];
 
+    if ($username && in_array($newRank, $allowedRanks, true)) {
+        // Rang aktualisieren
+        $stmt = $con->prepare("UPDATE users SET rank = :rank WHERE username = :username");
+        if ($stmt->execute([':rank' => $newRank, ':username' => $username])) {
+            $message = "Rang erfolgreich geändert.";
+        } else {
+            $message = "Fehler beim Ändern des Rangs.";
+        }
+    } else {
+        $message = "Ungültige Eingabe.";
+    }
 }
 
 // Alle Benutzer holen
@@ -36,7 +47,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
   <meta charset="UTF-8" />
   <title>Benutzerliste</title>
-  <link rel="stylesheet" href="css/userlist.css" />
+  <link rel="stylesheet" href="css/playerrank.css" />
 </head>
 <body>
   <header>
@@ -54,7 +65,9 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <div class="background-overlay">
   <div class="content">
     <h2>Benutzer &amp; Ränge</h2>
-
+    <?php if ($message): ?>
+      <div style="color: #007700; margin-bottom: 10px;"><?= htmlspecialchars($message) ?></div>
+    <?php endif; ?>
     <table>
       <thead>
         <tr>
