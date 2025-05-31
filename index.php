@@ -47,8 +47,9 @@ if (isset($_POST["login"])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="de">
 <head>
+<html lang="de">
+  <link rel="icon" type="png" href="img/logo.png">
   <meta charset="UTF-8">
   <title>Login & Registrierung</title>
   <link rel="stylesheet" href="css/register.css">

@@ -284,3 +284,10 @@ footer {
     flex-direction: column;
   }
 }
+
+
+    .expired-schedule {
+      background: #ffeaea !important;
+      border: 2px solid #ff4d4f !important;
+      opacity: 0.7;
+    }

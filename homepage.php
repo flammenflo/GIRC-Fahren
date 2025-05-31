@@ -104,12 +104,11 @@ $now = new DateTime();
 </head>
 <body>
 <header>
-    <div class="logo">MeineApp</div>
+  <div class="logo">GIRC Manager</div>
     <nav>
         <ul>
             <li><a href="#">Fahrten</a></li>
             <li><a href="userlist.php">Admin</a></li>
-            <li><a href="#">Einstellungen</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>

@@ -51,12 +51,12 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
   <header>
-    <div class="logo">MeineApp</div>
+  <div class="logo">GIRC Manager</div>
     <nav>
       <ul>
-        <li><a href="Fahrpläne.php">Fahrpläne</a></li>
+        <li><a href="homepage.php">Startseite</a></li>
         <li><a href="Userlist.php">UserListe</a></li>
-        <li><a href="#">Fahrpläne</a></li>
+        <li><a href="Fahrpläne.php">Fahrpläne</a></li>
         <li><a href="logout.php">Logout</a></li>
       </ul>
     </nav>

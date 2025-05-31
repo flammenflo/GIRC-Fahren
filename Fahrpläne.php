@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once 'connection.php';
 
 // Handle Form Actions
@@ -95,6 +95,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// --- Abgelaufene Fahrpläne nach 5 Minuten löschen ---
+function deleteExpiredSchedules($con) {
+    $sql = "SELECT s.id, MAX(ss.time) as last_time, MAX(ss.date) as last_date
+            FROM schedule s
+            JOIN schedule_station ss ON s.id = ss.schedule_id
+            GROUP BY s.id";
+    $stmt = $con->query($sql);
+    $now = new DateTime();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $lastDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $row['last_date'].' '.$row['last_time']);
+        if (!$lastDateTime) {
+            $lastDateTime = DateTime::createFromFormat('Y-m-d H:i', $row['last_date'].' '.$row['last_time']);
+        }
+        if ($lastDateTime && $now->getTimestamp() > ($lastDateTime->getTimestamp() + 5*60)) {
+            $con->prepare("DELETE FROM schedule_station WHERE schedule_id = ?")->execute([$row['id']]);
+            $con->prepare("DELETE FROM schedule_assignment WHERE schedule_id = ?")->execute([$row['id']]);
+            $con->prepare("DELETE FROM schedule WHERE id = ?")->execute([$row['id']]);
+        }
+    }
+}
+deleteExpiredSchedules($con);
+
 // Load Data
 $schedules = $con->query("SELECT * FROM schedule ORDER BY date DESC, time DESC")->fetchAll(PDO::FETCH_ASSOC);
 $users = $con->query("SELECT id, username FROM users")->fetchAll(PDO::FETCH_ASSOC);
@@ -113,6 +135,20 @@ function getAssignments($con, $schedule_id) {
         WHERE sa.schedule_id = ?");
     $stmt->execute([$schedule_id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getLastStationDateTime($con, $schedule_id) {
+    $stmt = $con->prepare("SELECT date, time FROM schedule_station WHERE schedule_id = ? ORDER BY date DESC, time DESC LIMIT 1");
+    $stmt->execute([$schedule_id]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+        $dt = DateTime::createFromFormat('Y-m-d H:i:s', $row['date'].' '.$row['time']);
+        if (!$dt) {
+            $dt = DateTime::createFromFormat('Y-m-d H:i', $row['date'].' '.$row['time']);
+        }
+        return $dt;
+    }
+    return null;
 }
 
 // Bearbeitungsmodus prüfen
@@ -157,18 +193,38 @@ function addStationRow() {
 function removeStationRow(btn) {
   btn.closest('.station-row').remove();
 }
+
+// --- Nutzer hinzufügen/entfernen ---
+function addUserRow() {
+  const tpl = document.getElementById('user-template').content.cloneNode(true);
+  document.getElementById('users-list').appendChild(tpl);
+}
+function removeUserRow(btn) {
+  btn.closest('.user-row').remove();
+}
   </script>
+  <style>
+    .expired-schedule {
+      background: #ffeaea !important;
+      border: 2px solid #ff4d4f !important;
+      opacity: 0.7;
+    }
+    .ended-schedule {
+      background: #fffbe6 !important;
+      border: 2px solid #ffd700 !important;
+    }
+  </style>
 </head>
 <body>
 <div class="background-overlay"></div>
 <header>
-  <div class="logo">MeineApp</div>
+  <div class="logo">GIRC Manager</div>
   <nav>
     <ul>
-      <li><a href="Fahrpläne.php">Fahrpläne</a></li>
-      <li><a href="Userlist.php">UserListe</a></li>
-      <li><a href="#">Fahrpläne</a></li>
-      <li><a href="logout.php">Logout</a></li>
+        <li><a href="homepage.php">Startseite</a></li>
+        <li><a href="Userlist.php">UserListe</a></li>
+        <li><a href="Fahrpläne.php">Fahrpläne</a></li>
+        <li><a href="logout.php">Logout</a></li>
     </ul>
   </nav>
 </header>
@@ -231,7 +287,22 @@ function removeStationRow(btn) {
     <h3>📋 Bestehende Fahrpläne</h3>
     <div class="schedule-grid">
       <?php foreach ($schedules as $s): ?>
-        <div class="schedule-card">
+        <?php
+          $lastStationDT = getLastStationDateTime($con, $s['id']);
+          $now = new DateTime();
+          $isEnded = false;
+          $isExpired = false;
+          if ($lastStationDT) {
+              if ($now >= $lastStationDT) {
+                  $isEnded = true;
+              }
+              if ($now->getTimestamp() > ($lastStationDT->getTimestamp() + 5*60)) {
+                  $isExpired = true;
+              }
+          }
+        ?>
+        <?php if ($isExpired) continue; // Nicht mehr anzeigen, wird gelöscht ?>
+        <div class="schedule-card<?= $isEnded ? ' ended-schedule' : '' ?>">
           <?php if ($edit_schedule && $edit_schedule['id'] == $s['id']): ?>
             <!-- Bearbeitungsformular -->
             <form method="post">
